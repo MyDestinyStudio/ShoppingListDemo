@@ -76,7 +76,7 @@ class MainActivity : ComponentActivity() {
 
                 val viewModel =ShoppingListViewModel( this.applicationContext)
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    ShoppingListApp(modifier = Modifier.padding(innerPadding),viewModel)
+                    ShoppingListApp(modifier = Modifier.padding(innerPadding).fillMaxSize(),viewModel)
                 }
             }
         }
@@ -107,7 +107,7 @@ fun ShoppingListApp(modifier: Modifier,viewModel: ShoppingListViewModel
 
 
 
-    Surface( modifier = modifier){
+    Surface( modifier = modifier ){
         Column {
             TopAppBar(
                 title = { Text(text = "Magical Shopping List") },
