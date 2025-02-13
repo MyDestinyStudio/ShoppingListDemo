@@ -137,7 +137,7 @@ fun ShoppingListApp(modifier: Modifier,viewModel: ShoppingListViewModel
                         showCartPopup=!showCartPopup
                     }) {
                         Icon(
-                            imageVector = if (sortOrder == SortOrder.ALPHABETICAL) Icons.Filled.ShoppingCart
+                            imageVector = if (cartList.isNotEmpty()) Icons.Filled.ShoppingCart
                             else Icons.Outlined.ShoppingCart,
                             contentDescription = "Toggle Sort Order"
                         )
@@ -315,8 +315,8 @@ fun DefaultPreview() {
 fun ProductItem(item: ShoppingItem= ShoppingItem(2, "Dragon Eggs", 1, R.drawable.egg)
 
                 ) {
-    Card {
-        Row( modifier = Modifier
+    Card(elevation = CardDefaults.cardElevation(defaultElevation = 7.dp)) {
+        Row( modifier = Modifier.fillMaxWidth()
 
             .padding(8.dp)
             ,
@@ -327,7 +327,7 @@ fun ProductItem(item: ShoppingItem= ShoppingItem(2, "Dragon Eggs", 1, R.drawable
                 painter = painterResource(id = item.iconResId),
                 contentDescription = item.name,
                 modifier = Modifier
-                    .padding(start = 18.dp)
+                    .padding(start = 18.dp, end = 5.dp)
                     .size(12.dp)
                  )
             Text(text = item.name)
@@ -363,10 +363,12 @@ fun CartPopup(
 
         ) {
 
-                Text(modifier = Modifier.align(Alignment.CenterHorizontally),
+                Text(modifier = Modifier.align(Alignment.CenterHorizontally).padding(top = 7.dp),
                     text = "Shopping Cart", style = MaterialTheme.typography.bodySmall )
 
-    LazyColumn(modifier = Modifier.align(Alignment.CenterHorizontally)) {
+    LazyColumn(modifier = Modifier.align(Alignment.CenterHorizontally),
+           contentPadding = PaddingValues(16.dp),
+          verticalArrangement = Arrangement.spacedBy(8.dp  )) {
                         items(shoppingList) { item ->
                             ProductItem(
 
